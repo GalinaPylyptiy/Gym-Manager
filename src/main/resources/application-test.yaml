@@ -1,0 +1,18 @@
+spring:
+    datasource:
+        driver-class-name: org.postgresql.Driver
+        url: jdbc:postgresql://localhost:5432/gym
+        username: galina
+        password: u1zazgtf
+    application:
+        name: gym-manager
+    jpa:
+        hibernate:
+            ddl-auto: update
+        show-sql: false
+    activemq:
+        broker-url: ${BROKER_URL}
+        user: ${ACTIVEMQ_USER}
+        password: ${ACTIVEMQ_PASSWORD}
+server:
+    port: 8080

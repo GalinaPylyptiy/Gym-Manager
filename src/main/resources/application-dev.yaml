@@ -1,0 +1,53 @@
+spring:
+    datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_NAME}
+        username: ${DB_USER}
+        password: ${DB_PASSWORD}
+    application:
+        name: gym-manager
+    activemq:
+        broker-url: ${BROKER_URL}
+        user: ${ACTIVEMQ_USER}
+        password: ${ACTIVEMQ_PASSWORD}
+
+server:
+    port: 8080
+
+#eureka:
+#    client:
+#        serviceUrl:
+#          defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+#    instance:
+#       preferIpAddress: true
+
+management:
+    endpoints:
+     web:
+        base-path: /actuator
+        exposure:
+            include: health,metrics,prometheus,loggers
+    endpoint:
+      prometheus:
+        enabled: true
+      health:
+        show-details: always
+    health:
+        circuitbreakers:
+            enabled: true
+logging:
+    pattern:
+        console: '%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %X{transactionId} - %msg%n'
+
+resilience4j:
+    circuitbreaker:
+        instances:
+            gym-manager:
+                registerHealthIndicator: true
+                failureRateThreshold: 50
+                minimumNumberOfCalls: 5
+                automaticTransitionFromOpenToHalfOpenEnabled: true
+                waitDurationInOpenState: 5s
+                permittedNumberOfCallsInHalfOpenState: 2
+                slidingWindowSize: 10
+                slidingWindowType: COUNT_BASED
