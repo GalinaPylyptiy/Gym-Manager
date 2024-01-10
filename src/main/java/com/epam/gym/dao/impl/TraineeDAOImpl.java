@@ -10,6 +10,7 @@ import jakarta.persistence.NonUniqueResultException;
 import jakarta.persistence.PersistenceUnit;
 import jakarta.persistence.RollbackException;
 import org.springframework.stereotype.Repository;
+
 import java.util.Collection;
 
 @Repository
@@ -23,7 +24,7 @@ public class TraineeDAOImpl implements TraineeDAO {
         EntityManager entityManager = emf.createEntityManager();
         try {
             entityManager.getTransaction().begin();
-            Trainee trainee = entityManager.createQuery("SELECT t FROM Trainee t JOIN t.user u WHERE u.userName = :userName", Trainee.class)
+            Trainee trainee = entityManager.createQuery("SELECT t FROM Trainee t LEFT JOIN FETCH t.trainers JOIN t.user u WHERE u.userName = :userName", Trainee.class)
                     .setParameter("userName", userName).getSingleResult();
             entityManager.getTransaction().commit();
             return trainee;

@@ -2,10 +2,11 @@ package com.epam.gym.dao.impl;
 
 import com.epam.gym.dao.TrainingTypeDAO;
 import com.epam.gym.model.TrainingType;
+import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
-import jakarta.persistence.EntityManager;
+
 import java.util.Collection;
 import java.util.Optional;
 

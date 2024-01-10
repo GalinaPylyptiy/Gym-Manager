@@ -44,10 +44,9 @@ public class TrainingServiceImpl implements TrainingService {
         Trainer trainer = training.getTrainer();
         Trainee trainee = training.getTrainee();
         trainee.getTrainers().add(trainer);
-        trainer.getTrainees().add(trainee);
         trainingDAO.save(training);
-        messageSender.send(getTrainingRequest(ActionType.ADD, training));
         LOG.info("Added new training " + training);
+        messageSender.send(getTrainingRequest(ActionType.ADD, training));
     }
 
     @Override

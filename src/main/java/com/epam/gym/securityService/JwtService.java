@@ -1,7 +1,5 @@
 package com.epam.gym.securityService;
 
-import com.epam.gym.model.User;
-
 import java.util.Map;
 
 public interface JwtService {

@@ -1,8 +1,8 @@
 package com.epam.gym.mapper;
 
-import com.epam.gym.dto.training.TrainingReportRequest;
 import com.epam.gym.dto.training.TrainingCreateDTO;
 import com.epam.gym.dto.training.TrainingDTO;
+import com.epam.gym.dto.training.TrainingReportRequest;
 import com.epam.gym.model.Trainee;
 import com.epam.gym.model.Trainer;
 import com.epam.gym.model.Training;
@@ -33,34 +33,34 @@ public class TrainingMapper {
         this.traineeService = traineeService;
     }
 
-    public TrainingDTO toDto(Training training){
-      TrainingDTO trainingDTO = new TrainingDTO();
-      trainingDTO.setTrainingName(training.getTrainingName());
-      trainingDTO.setDuration(training.getTrainingDuration());
-      trainingDTO.setTrainingDate(training.getTrainingTime());
-      trainingDTO.setTrainerName(training.getTrainer().getUser().getUserName());
-      trainingDTO.setTraineeName(training.getTrainee().getUser().getUserName());
-      trainingDTO.setType(training.getTrainingType());
-      return trainingDTO;
-   }
+    public TrainingDTO toDto(Training training) {
+        TrainingDTO trainingDTO = new TrainingDTO();
+        trainingDTO.setTrainingName(training.getTrainingName());
+        trainingDTO.setDuration(training.getTrainingDuration());
+        trainingDTO.setTrainingDate(training.getTrainingTime());
+        trainingDTO.setTrainerName(training.getTrainer().getUser().getUserName());
+        trainingDTO.setTraineeName(training.getTrainee().getUser().getUserName());
+        trainingDTO.setType(training.getTrainingType());
+        return trainingDTO;
+    }
 
-   public Training toModel(TrainingCreateDTO trainingCreateDTO){
-      Training training = new Training();
-      Trainer trainer = trainerService.getByUserName(trainingCreateDTO.getTrainerUsername());
-      Trainee trainee = traineeService.getByUserName(trainingCreateDTO.getTraineeUsername());
-      TrainingType trainingType = trainer.getSpecialization();
-      training.setTrainingDuration(trainingCreateDTO.getDuration());
-      training.setTrainingName(trainingCreateDTO.getTrainingName());
-      training.setTrainingTime(trainingCreateDTO.getTrainingDate());
-      training.setTrainee(trainee);
-      training.setTrainer(trainer);
-      training.setTrainingType(trainingType);
-      return training;
-   }
+    public Training toModel(TrainingCreateDTO trainingCreateDTO) {
+        Training training = new Training();
+        Trainer trainer = trainerService.getByUserName(trainingCreateDTO.getTrainerUsername());
+        Trainee trainee = traineeService.getByUserName(trainingCreateDTO.getTraineeUsername());
+        TrainingType trainingType = trainer.getSpecialization();
+        training.setTrainingDuration(trainingCreateDTO.getDuration());
+        training.setTrainingName(trainingCreateDTO.getTrainingName());
+        training.setTrainingTime(trainingCreateDTO.getTrainingDate());
+        training.setTrainee(trainee);
+        training.setTrainer(trainer);
+        training.setTrainingType(trainingType);
+        return training;
+    }
 
-   public TrainingReportRequest toRequestDtoWithoutActionType(Training training){
+    public TrainingReportRequest toRequestDtoWithoutActionType(Training training) {
         TrainingReportRequest clientRequest = new TrainingReportRequest();
-        User user  = training.getTrainer().getUser();
+        User user = training.getTrainer().getUser();
         clientRequest.setUsername(user.getUserName());
         clientRequest.setFirstName(user.getFirstName());
         clientRequest.setLastName(user.getLastName());
@@ -68,15 +68,15 @@ public class TrainingMapper {
         clientRequest.setDate(convertToLocalDateTime(training.getTrainingTime()));
         clientRequest.setDuration(Duration.ofMinutes(training.getTrainingDuration()));
         return clientRequest;
-   }
+    }
 
-   public List<TrainingDTO> toDtoList(Collection<Training> trainingList){
-       return trainingList.stream()
-               .map(this::toDto)
-               .collect(Collectors.toList());
-   }
+    public List<TrainingDTO> toDtoList(Collection<Training> trainingList) {
+        return trainingList.stream()
+                .map(this::toDto)
+                .collect(Collectors.toList());
+    }
 
-   private LocalDateTime convertToLocalDateTime(Date dateToConvert) {
+    private LocalDateTime convertToLocalDateTime(Date dateToConvert) {
         return dateToConvert.toInstant()
                 .atZone(ZoneId.systemDefault())
                 .toLocalDateTime();

@@ -2,20 +2,22 @@ package com.epam.gym.dao.impl;
 
 import com.epam.gym.dao.TrainerDAO;
 import com.epam.gym.model.Trainer;
-import org.springframework.stereotype.Repository;
-//import javax.persistence.EntityManager;
-//import javax.persistence.EntityManagerFactory;
-//import javax.persistence.NoResultException;
-//import javax.persistence.NonUniqueResultException;
-//import javax.persistence.PersistenceUnit;
-//import javax.persistence.RollbackException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.NonUniqueResultException;
 import jakarta.persistence.PersistenceUnit;
 import jakarta.persistence.RollbackException;
+import org.springframework.stereotype.Repository;
+
 import java.util.Collection;
+
+//import javax.persistence.EntityManager;
+//import javax.persistence.EntityManagerFactory;
+//import javax.persistence.NoResultException;
+//import javax.persistence.NonUniqueResultException;
+//import javax.persistence.PersistenceUnit;
+//import javax.persistence.RollbackException;
 
 @Repository
 public class TrainerDAOImpl implements TrainerDAO {
@@ -28,7 +30,7 @@ public class TrainerDAOImpl implements TrainerDAO {
         EntityManager entityManager = emf.createEntityManager();
         try {
             entityManager.getTransaction().begin();
-            Trainer trainer = entityManager.createQuery("Select t from Trainer t inner join t.user u where u.userName = : userName", Trainer.class)
+            Trainer trainer = entityManager.createQuery("Select t from Trainer t left join fetch t.trainees inner join t.user u where u.userName = : userName", Trainer.class)
                     .setParameter("userName", userName).getSingleResult();
             entityManager.getTransaction().commit();
             return trainer;
