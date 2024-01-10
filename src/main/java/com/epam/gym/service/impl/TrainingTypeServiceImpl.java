@@ -1,14 +1,13 @@
 package com.epam.gym.service.impl;
 
 import com.epam.gym.dao.TrainingTypeDAO;
-
 import com.epam.gym.model.TrainingType;
 import com.epam.gym.service.TrainingTypeService;
-
 import jakarta.persistence.EntityNotFoundException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Service;
+
 import java.util.Collection;
 
 @Service

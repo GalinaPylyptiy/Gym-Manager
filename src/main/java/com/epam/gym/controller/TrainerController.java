@@ -1,4 +1,5 @@
 package com.epam.gym.controller;
+
 import com.epam.gym.dto.RegistrationResponse;
 import com.epam.gym.dto.trainer.TrainerDTO;
 import com.epam.gym.dto.trainer.TrainerProfileResponse;
@@ -6,7 +7,6 @@ import com.epam.gym.dto.trainer.TrainerRegisterRequest;
 import com.epam.gym.dto.trainer.TrainerUpdateRequest;
 import com.epam.gym.dto.trainer.TrainerUpdateResponse;
 import com.epam.gym.dto.training.TrainingDTO;
-import com.epam.gym.mapper.TraineeMapper;
 import com.epam.gym.mapper.TrainerMapper;
 import com.epam.gym.mapper.TrainingMapper;
 import com.epam.gym.model.Trainer;

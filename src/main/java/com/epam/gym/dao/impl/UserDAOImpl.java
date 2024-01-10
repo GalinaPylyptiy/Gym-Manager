@@ -3,17 +3,17 @@ package com.epam.gym.dao.impl;
 import com.epam.gym.dao.UserDAO;
 import com.epam.gym.model.User;
 import io.micrometer.core.annotation.Timed;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.persistence.NoResultException;
+import jakarta.persistence.PersistenceUnit;
 import jakarta.persistence.Query;
+import jakarta.persistence.RollbackException;
 import jakarta.persistence.TypedQuery;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Service;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.NoResultException;
-import jakarta.persistence.PersistenceUnit;
-import jakarta.persistence.RollbackException;
 
 @Service
 public class UserDAOImpl implements UserDAO {

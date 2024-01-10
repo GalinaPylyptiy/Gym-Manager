@@ -3,8 +3,6 @@ package com.epam.gym.dao;
 
 import com.epam.gym.model.User;
 
-import java.util.Optional;
-
 public interface UserDAO {
 
     User findByUsername(String username);

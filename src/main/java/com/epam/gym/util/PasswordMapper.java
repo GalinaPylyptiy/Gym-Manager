@@ -1,7 +1,5 @@
 package com.epam.gym.util;
 
-import org.springframework.stereotype.Component;
-
 public class PasswordMapper {
 
     public static char[] toCharArray(String password){

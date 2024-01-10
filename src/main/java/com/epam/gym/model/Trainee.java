@@ -37,7 +37,7 @@ public class Trainee implements Serializable {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
             name = "trainee_trainer",
             joinColumns = @JoinColumn(name = "trainee_id"),
@@ -84,7 +84,7 @@ public class Trainee implements Serializable {
         return trainers;
     }
 
-    public void setTrainers(Collection<Trainer> trainers) {
+    public void setTrainers(Collection<Trainer> trainers)  {
         this.trainers = trainers;
     }
 
