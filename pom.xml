@@ -180,7 +180,7 @@
     <build>
         <testResources>
             <testResource>
-                <directory>src/it/resources</directory>
+                <directory>src/test-integration/resources</directory>
             </testResource>
             <testResource>
                 <directory>src/test/resources</directory>
@@ -194,6 +194,10 @@
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.11.0</version>
+                <configuration>
+                    <source>17</source>
+                    <target>17</target>
+                </configuration>
                 <executions>
                     <execution>
                         <id>default-testCompile</id>
@@ -204,7 +208,7 @@
                         <configuration>
                             <compileSourceRoots>
                                 <compileSourceRoot>src/test/java</compileSourceRoot>
-                                <compileSourceRoot>src/it/java</compileSourceRoot>
+                                <compileSourceRoot>src/test-integration/java</compileSourceRoot>
                             </compileSourceRoots>
                         </configuration>
                     </execution>
