@@ -1,0 +1,47 @@
+version: '3'
+
+name: gym
+services:
+    db:
+        image: mysql:latest
+        environment:
+            MYSQL_ROOT_PASSWORD: rootpassword
+            MYSQL_DATABASE: gym
+            MYSQL_USER: user
+            MYSQL_PASSWORD: password
+        ports:
+            - "3306:3306"
+        volumes:
+            - ./db_data:/var/lib/mysql
+        healthcheck:
+            test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "user", "-ppassword"]
+            interval: 10s
+            timeout: 5s
+            retries: 5
+
+
+    gym:
+        build:
+            context: .
+        image: gym-service:latest
+        ports:
+            - "8080:8080"
+        depends_on:
+          db:
+            condition: service_healthy
+        environment:
+            ACTIVE_PROFILE: dev
+            DB_HOST: db
+            DB_PORT: 3306
+            DB_NAME: gym
+            DB_USER: user
+            DB_PASSWORD: password
+            SECRET_KEY: 48404D635166546A576E5A7234753778217A25432A462D4A614E645267556B58
+            BROKER_URL: tcp://192.168.0.102:61616
+            ACTIVEMQ_USER: admin
+            ACTIVEMQ_PASSWORD: admin
+
+volumes:
+    db_data:
+
+
