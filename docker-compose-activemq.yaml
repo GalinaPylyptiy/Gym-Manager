@@ -1,0 +1,18 @@
+version: '3'
+
+name: queue
+services:
+    queue:
+      image: apache/activemq-artemis:latest-alpine
+      container_name: activemq-artemis
+      ports:
+        - "61616:61616"
+        - "8161:8161"
+      environment:
+         ARTEMIS_USER: admin
+         ARTEMIS_PASSWORD: admin
+      healthcheck:
+         test: ["CMD", "nc", "-z", "localhost", "61616"]
+         interval: 10s
+         timeout: 5s
+         retries: 5

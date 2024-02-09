@@ -9,10 +9,12 @@ import jakarta.jms.ConnectionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.annotation.EnableJms;
+import org.springframework.jms.connection.JmsTransactionManager;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.support.converter.MappingJackson2MessageConverter;
 import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.jms.support.converter.MessageType;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import java.util.HashMap;
@@ -62,9 +64,9 @@ public class JMSConfig {
         return jmsTemplate;
     }
 
-//    @Bean
-//    public PlatformTransactionManager jmsTransactionManager(){
-//        return new JmsTransactionManager(connectionFactory);
-//    }
+    @Bean
+    public PlatformTransactionManager jmsTransactionManager(){
+        return new JmsTransactionManager(connectionFactory);
+    }
 
 }

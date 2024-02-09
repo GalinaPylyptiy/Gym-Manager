@@ -178,6 +178,7 @@
         </dependencies>
     </dependencyManagement>
     <build>
+        <finalName>gym-manager</finalName>
         <testResources>
             <testResource>
                 <directory>src/test-integration/resources</directory>

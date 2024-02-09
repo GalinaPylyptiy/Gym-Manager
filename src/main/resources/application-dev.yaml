@@ -12,6 +12,10 @@ spring:
         password: ${ACTIVEMQ_PASSWORD}
     flyway:
         baseline-on-migrate: true
+#        url: jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_NAME}
+#        schemas: ${DB_NAME}
+#        user: ${DB_USER}
+#        password: ${DB_PASSWORD}
 
 server:
     port: 8080
